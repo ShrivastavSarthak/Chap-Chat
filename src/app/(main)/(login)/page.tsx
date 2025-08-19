@@ -1,6 +1,6 @@
 import { media } from "@/public";
 import Image from "next/image";
-import { css_constants } from "../../utils/constants/css.constants";
+import { css_constants } from "../../../utils/constants/css.constants";
 import AuthPage from "@/src/components/auth/auth";
 
 export default function Home() {

@@ -1,4 +1,4 @@
-import { css_constants } from "@/src/app/utils/constants/css.constants";
+import { css_constants } from "@/src/utils/constants/css.constants";
 import { Button } from "@/src/lib/components/ui/button";
 import { Input } from "@/src/lib/components/ui/input";
 import { HiOutlineMail } from "react-icons/hi";
