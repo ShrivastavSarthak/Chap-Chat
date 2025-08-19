@@ -25,7 +25,7 @@ export default function AuthPage() {
         disabled:from-[rgba(25,169,249,0.25)] disabled:to-[rgba(15,41,92,0.25)]
         `}
       >
-        Next
+        <p className={`${css_constants.p2} text-[#fff]`}>Next</p>
       </Button>
       <p className={`${css_constants.p3} text-center`}>
         By signing up, you agree to{" "}
