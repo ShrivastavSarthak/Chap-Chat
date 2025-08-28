@@ -1,38 +1,38 @@
-import { css_constants } from "@/src/utils/constants/css.constants";
+"use client";
 import { Button } from "@/src/lib/components/ui/button";
-import { Input } from "@/src/lib/components/ui/input";
-import { HiOutlineMail } from "react-icons/hi";
-export default function AuthPage() {
+import { css_constants } from "@/src/utils/constants/css.constants";
+import {
+  usePathname,
+  useRouter
+} from "next/navigation";
+import { ReactNode } from "react";
+import { FaArrowLeftLong } from "react-icons/fa6";
+
+export default function AuthPage({ compo }: { compo: ReactNode }) {
+  const navigate = useRouter();
+  const params = usePathname().split("/")[1];
+
   return (
     <>
-      <div className=" relative w-full border-[2px] rounded-[12px] border-[#939393] bg-[#fff] flex p-[18px] justify-start items-center gap-1.5">
-        <div className="absolute top-[-15px] px-2 bg-[#fff]">
-          <p className={`${css_constants.p2} text-[#585858] `}>Email</p>
-        </div>
-        <HiOutlineMail size={50} className="text-[#585858]" />
-        <Input placeholder="Enter your email ID" />
+      <div className="flex lg:flex-col flex-row w-[60%]  lg:justify-end justify-between lg:items-stretch items-center mb-[24px]">
+        {params === "otp" && (
+          <Button variant="ghost" size="icon" onClick={() => navigate.back()}>
+            <FaArrowLeftLong className="w-[32px] h-[32px]" size={32} />
+          </Button>
+        )}
+        <h2 className={`${css_constants.h2} text-center lg:text-left `}>
+          Login{" "}
+        </h2>
       </div>
-      <Button
-        size="lg"
-        disabled
-        className={`
-        w-full 
-        flex justify-center items-center gap-[9.156px]
-        self-stretch
-        h-[64.089px] px-[34.333px] py-[17.167px]
-        rounded-[12px] 
-        bg-gradient-to-b from-[#0F295C] to-[#19A9F9]
-        disabled:from-[rgba(25,169,249,0.25)] disabled:to-[rgba(15,41,92,0.25)]
-        `}
-      >
-        <p className={`${css_constants.p2} text-[#fff]`}>Next</p>
-      </Button>
-      <p className={`${css_constants.p3} text-center`}>
-        By signing up, you agree to{" "}
-        <span className="text-[#19A9F9]">Terms and Conditions</span>,{" "}
-        <span className="text-[#19A9F9]">Privacy Policy</span> &{" "}
-        <span className="text-[#19A9F9]">End User License Agreement</span>
-      </p>
+      <div className="flex flex-col items-start rounded-[32px] border border-[#D4D3D3] bg-white gap-6 p-[15px] px-4  md:gap-6 md:p-[15px] md:px-4 lg:w-[580px] lg:p-8 lg:gap-8  w-full">
+        {compo}
+        <p className={`${css_constants.p3} text-center`}>
+          By signing up, you agree to{" "}
+          <span className="text-[#19A9F9]">Terms and Conditions</span>,{" "}
+          <span className="text-[#19A9F9]">Privacy Policy</span> &{" "}
+          <span className="text-[#19A9F9]">End User License Agreement</span>
+        </p>
+      </div>
     </>
   );
 }

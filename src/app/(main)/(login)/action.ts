@@ -13,8 +13,6 @@ export async function saveEmail(email: string) {
     body: { email },
   });
 
-  
-
   if (res.status === 200) {
     (await cookies()).set("token", res.data?.data, {
       httpOnly: true,
@@ -38,7 +36,6 @@ export async function saveEmail(email: string) {
 export async function verifyOtp(Otp: string) {
   const token = (await cookies()).get("token");
   const email = (await cookies()).get("email");
-
 
   const res = await apiFetch({
     method: apiMethod.POST,

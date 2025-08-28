@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Oneorg",
     short_name: "Oneorg",
     description: "A Progressive Web App built with Oneorg",
-    start_url: "/",
+    start_url: "/(main)/(login)",
     display: "standalone",
     background_color: "#ffffff",
     theme_color: "#000000",
