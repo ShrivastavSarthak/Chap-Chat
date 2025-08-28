@@ -37,8 +37,6 @@ export async function verifyOtp(Otp: string) {
   const token = (await cookies()).get("token");
   const email = (await cookies()).get("email");
 
-  console.log(email?.value);
-  
   const res = await apiFetch({
     method: apiMethod.POST,
     url: "/auth/validate",
@@ -50,13 +48,15 @@ export async function verifyOtp(Otp: string) {
   });
 
   if (res.status === 200) {
-    (await cookies()).set("auth_token", res.data, {
+    (await cookies()).set("auth_token", res.data?.data?.token, {
       httpOnly: true,
       secure: true,
       sameSite: "strict",
       path: "/",
-      maxAge: 60 * 5,
+      maxAge: 60 * 60 * 24 * 7,
     });
+    (await cookies()).delete("token");
+    (await cookies()).delete("email");
   }
 
   return res;

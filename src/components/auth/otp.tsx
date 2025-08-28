@@ -22,7 +22,6 @@ export default function Otp() {
     try {
       setIsLoading(true);
       const result = await verifyOtp(otpValue);
-
       if (result.status === 200) {
         toast.success(result.data?.message || "Otp verified successfully");
         navigate.push("/home");
