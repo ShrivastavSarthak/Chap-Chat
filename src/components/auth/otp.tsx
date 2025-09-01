@@ -7,7 +7,7 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/src/lib/components/ui/input-otp";
-import { css_constants } from "@/src/utils/constants/css.constants";
+import { text_size } from "@/src/utils/constants/css.constants";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -24,6 +24,8 @@ export default function Otp() {
       const result = await verifyOtp(otpValue);
       if (result.status === 200) {
         toast.success(result.data?.message || "Otp verified successfully");
+        console.log("result", result.data?.data?.user?._id);
+
         navigate.push("/home");
       } else {
         toast.error(result.message || "Failed to send OTP");
@@ -38,7 +40,7 @@ export default function Otp() {
   return (
     <>
       <div className="w-full flex flex-col justify-center items-center">
-        <p className={`text-[#696D6E] ${css_constants.p3} font-[400] mb-5`}>
+        <p className={`text-[#696D6E] ${text_size.p3} font-[400] mb-5`}>
           Enter OTP via Email ID
         </p>
         <InputOTP
@@ -91,7 +93,7 @@ export default function Otp() {
               disabled:from-[rgba(25,169,249,0.25)] disabled:to-[rgba(15,41,92,0.25)]
             `}
       >
-        <p className={`${css_constants.p2} text-[#fff]`}>Submit OTP</p>
+        <p className={`${text_size.p2} text-[#fff]`}>Submit OTP</p>
       </Button>
     </>
   );

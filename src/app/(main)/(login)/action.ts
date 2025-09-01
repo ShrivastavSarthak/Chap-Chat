@@ -55,6 +55,13 @@ export async function verifyOtp(Otp: string) {
       path: "/",
       maxAge: 60 * 60 * 24 * 7,
     });
+    (await cookies()).set("user_id", res.data?.data?.user?._id, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+    });
     (await cookies()).delete("token");
     (await cookies()).delete("email");
   }

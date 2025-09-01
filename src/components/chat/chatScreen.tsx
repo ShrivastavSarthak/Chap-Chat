@@ -1,28 +1,19 @@
 "use client";
 import { useState } from "react";
 import ChatInput from "./chat_input";
-import Suggestions from "./suggestions/suggestions";
 import NewChatsScreen from "./chats_screen/newChatScreen";
+import Suggestions from "./suggestions/suggestions";
+import { ChatInterface } from "@/src/utils/interface/chatInterface";
+import { useAppSelector } from "@/src/utils/services/store/hook";
 
-export interface ChatInterface {
-  query: string;
-  response: null | string;
-}
 export default function ChatScreen() {
-  const [newChat, setNewChat] = useState<ChatInterface[]>([]);
-  const getInput = (data: string) => {
-    setNewChat((prev) => [...prev, { query: data, response: null }]);
-  };
+  const chat = useAppSelector((state) => state.chats);
   return (
     <div
-      className={`w-full h-full overflow-hidden flex flex-col md:justify-center justify-end  items-center`}
+      className={`w-full h-full overflow-hidden flex flex-col md:justify-center justify-end  items-center px-5`}
     >
-      {newChat.length === 0 ? (
-        <Suggestions />
-      ) : (
-        <NewChatsScreen chats={newChat} />
-      )}
-      <ChatInput getInput={getInput} />
+      {chat.length === 0 ? <Suggestions /> : <NewChatsScreen />}
+      <ChatInput />
     </div>
   );
 }

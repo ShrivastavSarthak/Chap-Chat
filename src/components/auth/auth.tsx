@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/src/lib/components/ui/button";
-import { css_constants } from "@/src/utils/constants/css.constants";
+import { text_size } from "@/src/utils/constants/css.constants";
 import {
   usePathname,
   useRouter
@@ -20,13 +20,13 @@ export default function AuthPage({ compo }: { compo: ReactNode }) {
             <FaArrowLeftLong className="w-[32px] h-[32px]" size={32} />
           </Button>
         )}
-        <h2 className={`${css_constants.h2} text-center lg:text-left `}>
+        <h2 className={`${text_size.h2} text-center lg:text-left `}>
           Login{" "}
         </h2>
       </div>
       <div className="flex flex-col items-start rounded-[32px] border border-[#D4D3D3] bg-white gap-6 p-[15px] px-4  md:gap-6 md:p-[15px] md:px-4 lg:w-[580px] lg:p-8 lg:gap-8  w-full">
         {compo}
-        <p className={`${css_constants.p3} text-center`}>
+        <p className={`${text_size.p3} text-center`}>
           By signing up, you agree to{" "}
           <span className="text-[#19A9F9]">Terms and Conditions</span>,{" "}
           <span className="text-[#19A9F9]">Privacy Policy</span> &{" "}
