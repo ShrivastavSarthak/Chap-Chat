@@ -9,7 +9,7 @@ import {
   FormItem,
 } from "@/src/lib/components/ui/form";
 import { Input } from "@/src/lib/components/ui/input";
-import { css_constants } from "@/src/utils/constants/css.constants";
+import { text_size } from "@/src/utils/constants/css.constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -70,7 +70,7 @@ export default function Email() {
             <FormItem>
               <div className="relative w-full border-[2px] rounded-[12px] border-[#939393] bg-[#fff] flex md:p-[10px] p-[8px] justify-start items-center gap-1.5 mb-4">
                 <div className="absolute top-[-15px] px-2 bg-[#fff]">
-                  <p className={`${css_constants.p3} text-[#585858] `}>Email</p>
+                  <p className={`${text_size.p3} text-[#585858] `}>Email</p>
                 </div>
                 <HiOutlineMail size={45} className="text-[#585858]" />
                 <FormControl>
@@ -99,7 +99,7 @@ export default function Email() {
               disabled:from-[rgba(25,169,249,0.25)] disabled:to-[rgba(15,41,92,0.25)]
             `}
         >
-          <p className={`${css_constants.p2} text-[#fff]`}>Next</p>
+          <p className={`${text_size.p2} text-[#fff]`}>Next</p>
         </Button>
       </form>
     </Form>

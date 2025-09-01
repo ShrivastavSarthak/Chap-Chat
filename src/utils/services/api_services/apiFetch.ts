@@ -1,5 +1,6 @@
 import { AxiosError } from "axios";
 import api from "./api";
+import { headers } from "next/headers";
 
 export enum apiMethod {
   POST = "POST",
@@ -13,6 +14,7 @@ export interface GetFetchInterface<T = unknown> {
   method: apiMethod;
   url: string;
   body?: T;
+  header?: Record<string, string>;
 }
 
 export const apiFetch = async (data: GetFetchInterface) => {
@@ -21,19 +23,30 @@ export const apiFetch = async (data: GetFetchInterface) => {
 
     switch (data.method) {
       case apiMethod.GET:
-        res = await api.get(data.url);
+        res = await api.get(data.url, {
+          headers: data.header ?? {},
+        });
         break;
       case apiMethod.POST:
-        res = await api.post(data.url, data.body);
+        res = await api.post(data.url, data.body, {
+          headers: data.header ?? {},
+        });
         break;
       case apiMethod.DELETE:
-        res = await api.delete(data.url);
+        (res = await api.delete(data.url)),
+          {
+            headers: data.header ?? {},
+          };
         break;
       case apiMethod.PATCH:
-        res = await api.patch(data.url, data.body);
+        res = await api.patch(data.url, data.body, {
+          headers: data.header ?? {},
+        });
         break;
       case apiMethod.PUT:
-        res = await api.put(data.url, data.body);
+        res = await api.put(data.url, data.body, {
+          headers: data.header ?? {},
+        });
         break;
     }
 

@@ -1,3 +1,4 @@
+"use client";
 import { Avatar, AvatarImage } from "@/src/lib/components/ui/avatar";
 import { Button } from "@/src/lib/components/ui/button";
 import {
@@ -6,19 +7,19 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/src/lib/components/ui/dropdown-menu";
-import { css_constants } from "@/src/utils/constants/css.constants";
+import { text_size } from "@/src/utils/constants/css.constants";
+import { useAppSelector } from "@/src/utils/services/store/hook";
+import { ProfileDialog } from "./dialogs/profile_dialogs";
+import SignoutDialog from "./dialogs/signout_dialogs";
 
 export default function AppSidebarFooter() {
+  const userName = useAppSelector((state) => state.user.name);
+
   return (
-    <DropdownMenu >
+    <DropdownMenu>
       <DropdownMenuTrigger asChild className="w-full">
         <Button variant="ghost" className="cursor-pointer w-full">
           <Avatar>
@@ -28,22 +29,27 @@ export default function AppSidebarFooter() {
               className="w-[40px] h-[40px] rounded-full"
             />
           </Avatar>
-          <p className={`${css_constants.p3} font-semibold text-[#324054]`}>
-            Mimi Chowdhury
+          <p className={`${text_size.p3} font-semibold text-[#324054]`}>
+            {userName}
           </p>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="start">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuGroup>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem
+            className="cursor-pointer"
+            onSelect={(e) => e.preventDefault()}
+          >
+            <ProfileDialog />
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onSelect={(e) => e.preventDefault()}
+        >
+          <SignoutDialog />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

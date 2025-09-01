@@ -1,42 +1,56 @@
-import { ScrollArea } from "@/src/lib/components/ui/scroll-area";
-import { ChatInterface } from "../chatScreen";
-import { css_constants } from "@/src/utils/constants/css.constants";
+import { text_size } from "@/src/utils/constants/css.constants";
+import { useAppSelector } from "@/src/utils/services/store/hook";
+import { useEffect, useRef } from "react";
+import { ThreeDot } from "react-loading-indicators";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-const DummyChats: ChatInterface[] = [
-  { query: "Hello!", response: "Hi there 👋 How can I help you?" },
-  {
-    query: "Tell me a joke.",
-    response: "Why don’t skeletons fight each other? They don’t have the guts.",
-  },
-  { query: "What's 2 + 2?", response: "The answer is 4." },
-  {
-    query:
-      "Id dolore laboris, labore proident, sit do nisi consectetur mollit eiusmod et est! Ut laborum et incididunt est culpa? Irure aliquip, consequat labore incididunt et magna anim reprehenderit qui voluptate.Irure amet tempor adipiscing exercitation veniam. Non aute et sed minim qui! Et reprehenderit cupidatat, id non ut enim laboris? Ullamco et aute ut sit ex! Laboris ea duis id.Consectetur sunt laborum mollit, deserunt non magna id ut duis. Id adipiscing, eiusmod incididunt reprehenderit mollit, labore irure officia voluptate proident enim? Id voluptate proident elit exercitation quis laborum, do!",
-    response: "France won the 2018 FIFA World Cup.",
-  },
-  { query: "Goodbye!", response: null }, // response not available yet
-];
-export default function NewChatsScreen({ chats }: { chats: ChatInterface[] }) {
+export default function NewChatsScreen() {
+  const isChatLoading = useAppSelector((state) => state.loading.chatLoading);
+  const chats = useAppSelector((state) => state.chats);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chats, isChatLoading]);
+
   return (
     <>
-      <div className="w-full h-full flex justify-center items-start overflow-y-auto">
+      <div className="w-full h-full flex justify-center items-start overflow-y-auto mb-2">
         <div className="w-full max-w-[715px]  h-full flex  flex-col items-center">
           {chats.map((chat, i) => (
-            <div key={i} className="w-full">
-              {chat.query && (
+            <div key={chat._id} className="w-full">
+              {chat.role === "user" ? (
                 <div className="w-full flex justify-end my-6 ">
                   <span
-                    className={`bg-[#19A9F9] rounded-b-2xl rounded-l-2xl p-4 text-white ${css_constants.p2} max-w-[90%]`}
+                    className={`bg-[#19A9F9] rounded-b-2xl rounded-l-2xl p-4 text-white ${text_size.p2} max-w-[90%]`}
                   >
-                    {chat.query}
+                    {chat.content}
                   </span>
                 </div>
+              ) : (
+                <div className="w-full flex justify-start">
+                  <div className="w-full flex flex-col ">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {chat.content}
+                    </ReactMarkdown>
+                  </div>
+                </div>
               )}
-              {chat.response && (
-                <div className="w-full flex justify-start">{chat.response}</div>
+              {i === chats.length - 1 && isChatLoading && (
+                <div className="w-full flex justify-start p-2">
+                  <ThreeDot
+                    variant="pulsate"
+                    easing="ease-in-out"
+                    color="#19A9F9"
+                    size="small"
+                    text=""
+                  />
+                </div>
               )}
             </div>
           ))}
+          <div ref={bottomRef}></div>
         </div>
       </div>
     </>

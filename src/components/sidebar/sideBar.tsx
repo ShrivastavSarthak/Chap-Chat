@@ -1,24 +1,28 @@
+"use client";
+import { media } from "@/public";
+import { useAppDispatch } from "@/src/utils/services/store/hook";
+import { resetChats } from "@/src/utils/services/store/slice/chat";
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import Image from "next/image";
+import { Button } from "../../lib/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
 } from "../../lib/components/ui/sidebar";
-import Image from "next/image";
-import { media } from "@/public";
-import { Button } from "../../lib/components/ui/button";
-import { Avatar } from "@radix-ui/react-avatar";
-import { AvatarImage } from "../../lib/components/ui/avatar";
-import { css_constants } from "../../utils/constants/css.constants";
 import AppSidebarFooter from "./sideBarFooter";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/src/lib/components/ui/accordion";
 
 // Menu items.
 const items = [
@@ -50,6 +54,7 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const dispatch = useAppDispatch();
   return (
     <Sidebar collapsible="icon">
       <SidebarContent className="bg-[#EAFAFF] p-5 ">
@@ -68,10 +73,20 @@ export function AppSidebar() {
               <Button
                 variant="ghost"
                 className="w-[60%] cursor-pointer  flex justify-start items-center border-[1px] border-[#AEECFF] bg-[#D4F5FF] rounded-[30px] text-black hover:bg-[#D4F5FF]"
+                onClick={() => dispatch(resetChats())}
               >
                 New Chats
               </Button>
-              {items.map((item) => (
+              <Accordion type="single" collapsible>
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>Chat history</AccordionTrigger>
+                  <AccordionContent>
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+
+              {/* {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton className="" asChild>
                     <a href={item.url}>
@@ -80,7 +95,7 @@ export function AppSidebar() {
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-              ))}
+              ))} */}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

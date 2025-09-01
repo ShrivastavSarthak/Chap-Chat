@@ -1,6 +1,6 @@
 import { media } from "@/public";
 import Image from "next/image";
-import { css_constants } from "../../../utils/constants/css.constants";
+import { text_size } from "../../../utils/constants/css.constants";
 import AuthPage from "@/src/components/auth/auth";
 export default function LoginLayout({
   children,
@@ -31,7 +31,7 @@ export default function LoginLayout({
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 flex flex-col justify-end items-center">
                 <Image src={media.Logo} alt="Logo" width={300} height={100} />
                 <p
-                  className={`${css_constants.p2} text-white lg:mb-[66px] mb-[43px]`}
+                  className={`${text_size.p2} text-white lg:mb-[66px] mb-[43px]`}
                 >
                   Let’s empower your business growth through AI
                 </p>
