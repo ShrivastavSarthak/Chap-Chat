@@ -24,8 +24,6 @@ export default function Otp() {
       const result = await verifyOtp(otpValue);
       if (result.status === 200) {
         toast.success(result.data?.message || "Otp verified successfully");
-        console.log("result", result.data?.data?.user?._id);
-
         navigate.push("/home");
       } else {
         toast.error(result.message || "Failed to send OTP");

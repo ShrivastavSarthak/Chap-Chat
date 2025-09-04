@@ -35,18 +35,77 @@ export async function CreateChat({
   orgId: string;
 }) {
   const authToken = (await cookies()).get("auth_token");
+  const chatId = (await cookies()).get("chatId");
+
+  const data = chatId?.value
+    ? {
+        message,
+        orgId,
+        chatId: chatId.value,
+      }
+    : {
+        message,
+        orgId,
+      };
 
   const res = await apiFetch({
     method: apiMethod.POST,
     url: chats_url.createChat,
-    body: {
-      message,
-      orgId,
+    body: data,
+    header: {
+      Authorization: `Bearer ${authToken?.value}`,
     },
+  });
+
+  if (res.status === 200 && !chatId) {
+    (await cookies()).set("chatId", res.data?.chatId, {
+      httpOnly: false,
+      secure: true,
+      sameSite: "strict",
+      path: "/",
+    });
+  }
+
+  return res;
+}
+
+export async function ChatHistory() {
+  const authToken = (await cookies()).get("auth_token");
+
+  const res = apiFetch({
+    method: apiMethod.GET,
+    url: chats_url.allChatHistory,
+    header: {
+      Authorization: `Bearer ${authToken?.value}`,
+    },
+  });
+  return res;
+}
+
+export async function PerticularChatHistory(id: string) {
+  const authToken = (await cookies()).get("auth_token");
+
+  const res = await apiFetch({
+    method: apiMethod.GET,
+    url: StringFormatService(chats_url.chatHistory, [id]),
     header: {
       Authorization: `Bearer ${authToken?.value}`,
     },
   });
 
   return res;
+}
+
+export async function SetExistingChat(id: string) {
+  try {
+    (await cookies()).set("chatId", id, {
+      httpOnly: false,
+      secure: true,
+      sameSite: "strict",
+      path: "/",
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
 }

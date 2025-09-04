@@ -18,7 +18,7 @@ export const ChatSlice = createSlice({
     resetChats: () => {
       return [];
     },
-    setExistingChat: (state, action: PayloadAction<ChatInterface[]>) => {
+    setExistingChat: (_, action: PayloadAction<ChatInterface[]>) => {
       const existingChat = action.payload;
       return existingChat;
     },

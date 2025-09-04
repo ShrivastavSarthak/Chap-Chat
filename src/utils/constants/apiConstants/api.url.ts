@@ -6,5 +6,6 @@ export const user_url = {
 
 export const chats_url = {
   createChat: "/chat/send-message-to-assistant",
-  chatHistory: "/chat/all-chats",
+  allChatHistory: "/chat/all-chats",
+  chatHistory: "/chat/history/{0}",
 };
