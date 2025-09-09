@@ -23,10 +23,9 @@ export default function ChatScreen({ chatId }: { chatId: string }) {
     <div
       className={`w-full h-full overflow-hidden flex flex-col md:justify-center justify-end  items-center px-5`}
     >
-      {chat.length === 0 ? <Suggestions /> : <ChatsScreen />}
+      {chat.length !== 0 && <ChatsScreen />}
+      <Suggestions />
       <ChatInput />
     </div>
   );
 }
-
-

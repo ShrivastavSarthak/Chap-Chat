@@ -135,7 +135,7 @@ export function ProfileDialog() {
               <Avatar />
               <p className={`${text_size.p2} font-semibold`}>Name</p>
             </div>
-            <Button className={`${button_color.linerGradientEnable}`}>
+            <Button className={`${button_color.linerGradient}`}>
               Edit profile
             </Button>
           </div>

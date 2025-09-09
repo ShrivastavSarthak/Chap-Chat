@@ -8,5 +8,6 @@ export const text_size = {
 };
 
 export const button_color = {
-  linerGradientEnable: "bg-gradient-to-b from-[#0F295C] to-[#19A9F9]",
+  linerGradient:
+    "bg-gradient-to-b from-[#0F295C] to-[#19A9F9] disabled:from-[rgba(25,169,249,0.25)] disabled:to-[rgba(15,41,92,0.25)] ",
 };
