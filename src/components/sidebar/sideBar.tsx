@@ -110,7 +110,7 @@ export function AppSidebar() {
                 }`}
                 onClick={handleNewChat}
               >
-                <LuMessageCirclePlus className="text-3xl shrink-0" />
+                <LuMessageCirclePlus className="scale-100" />
                 {isOpen && "New Chats"}
               </Button>
 
