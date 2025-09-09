@@ -22,9 +22,9 @@ export default function ChatsScreen() {
           {chats.map((chat, i) => (
             <div key={chat._id} className="w-full">
               {chat.role === "user" ? (
-                <div className="w-full flex justify-end my-6 ">
+                <div className="w-full flex justify-end my-3 ">
                   <span
-                    className={`bg-[#19A9F9] rounded-b-2xl rounded-l-2xl p-4 text-white ${text_size.p2} max-w-[90%]`}
+                    className={`bg-[#19A9F9] rounded-b-2xl rounded-l-2xl p-2 text-white ${text_size.p3} max-w-[90%]`}
                   >
                     {chat.content}
                   </span>

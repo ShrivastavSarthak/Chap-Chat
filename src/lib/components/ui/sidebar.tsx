@@ -276,9 +276,9 @@ function SidebarTrigger({
       {...props}
     >
       {open ? (
-        <TbLayoutSidebarRightExpand className="h-10 w-10" />
+        <TbLayoutSidebarRightExpand className="scale-125" />
       ) : (
-        <TbLayoutSidebarLeftExpand className="h-10 w-10" />
+        <TbLayoutSidebarLeftExpand className="scale-125" />
       )}{" "}
       <span className="sr-only">Toggle Sidebar</span>
     </Button>

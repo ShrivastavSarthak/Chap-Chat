@@ -1,14 +1,6 @@
 "use client";
 import { CreateChat } from "@/src/app/(main)/home/action";
 import { Button } from "@/src/lib/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-} from "@/src/lib/components/ui/dropdown-menu";
 import { Textarea } from "@/src/lib/components/ui/textarea";
 import {
   useAppDispatch,
@@ -16,45 +8,15 @@ import {
 } from "@/src/utils/services/store/hook";
 import { addChat } from "@/src/utils/services/store/slice/chat";
 import { setChatLoading } from "@/src/utils/services/store/slice/loading";
-import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import React, { useState } from "react";
-import { FaArrowUp, FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { MdAttachFile } from "react-icons/md";
-import { RiChat3Line } from "react-icons/ri";
+import { BsGlobe } from "react-icons/bs";
+import { FaArrowUp } from "react-icons/fa";
 import { toast } from "sonner";
-
-function Research() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="default"
-          className="flex gap-2 cursor-pointer rounded-4xl border-[1px] border-[#AEECFF] bg-[#D4F5FF] text-black hover:bg-[#19A9F9]"
-        >
-          <span>Research</span>
-          {open ? <FaChevronUp /> : <FaChevronDown />}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="start">
-        <DropdownMenuGroup>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-}
+import { IoMicOutline } from "react-icons/io5";
 
 export default function ChatInput() {
   const [isInput, setIsInput] = useState<string>("");
+  const [deepSearch, setDeepSearch] = useState(false);
   const orgId = useAppSelector((state) => state.user.organizationId);
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.loading.chatLoading);
@@ -94,7 +56,11 @@ export default function ChatInput() {
   };
 
   const onEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+    if (
+      e.key === "Enter" &&
+      (e.ctrlKey || e.metaKey) &&
+      isInput.trim() !== ""
+    ) {
       e.preventDefault();
       handleChat();
     }
@@ -117,28 +83,35 @@ export default function ChatInput() {
         />
         <div className="w-full flex justify-between items-center mt-5">
           <div className="flex gap-3">
-            <Research />
             <Button
-              className="w-10 h-10 cursor-pointer rounded-full"
-              variant="ghost"
+              onClick={() => setDeepSearch(!deepSearch)}
+              variant="default"
+              className={`flex gap-2 cursor-pointer rounded-4xl border-[1px] border-[#AEECFF] bg-[#D4F5FF] text-black ${
+                deepSearch && "bg-[#19A9F9]"
+              } hover:bg-none`}
             >
-              <MdAttachFile />
-            </Button>
-            <Button
-              className="w-10 h-10 cursor-pointer rounded-full"
-              variant="ghost"
-            >
-              <RiChat3Line />
+              <BsGlobe />
+              <span>Deep search</span>
             </Button>
           </div>
-          <Button
-            disabled={isLoading || !isInput}
-            className="cursor-pointer  w-10 h-10 flex items-center justify-center rounded-full bg-[#D9D9D9] p-0"
-            variant="default"
-            onClick={handleChat}
-          >
-            <FaArrowUp />
-          </Button>
+          <div className="flex  gap-3">
+            <Button
+              className="w-[40px] h-[40px] cursor-pointer rounded-full"
+              variant="ghost"
+            >
+              <IoMicOutline  className=" scale-125 text-[#6B7280]" />
+            </Button>
+            <Button
+              disabled={isLoading || !isInput}
+              className="cursor-pointer  w-10 h-10 flex items-center justify-center rounded-full 
+            bg-gradient-to-b from-[#0F295C] to-[#19A9F9]
+            disabled:from-[rgba(25,169,249,0.25)] disabled:to-[rgba(15,41,92,0.25)] p-0"
+              variant="default"
+              onClick={handleChat}
+            >
+              <FaArrowUp />
+            </Button>
+          </div>
         </div>
       </div>
     </>
