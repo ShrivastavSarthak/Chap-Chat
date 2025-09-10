@@ -10,17 +10,14 @@ import {
 } from "@/src/lib/components/ui/dialog";
 import { Textarea } from "@/src/lib/components/ui/textarea";
 import { button_color, text_size } from "@/src/utils/constants/css.constants";
-import { useState } from "react";
+import React, { useState } from "react";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 import { toast } from "sonner";
 
-export default function AskOrg() {
+export default function AskOrg({ children }: { children: React.ReactElement }) {
   const [question, setQuestion] = useState<string>("");
 
   function handleSubmit() {
-    console.log("====================================");
-    console.log("submit");
-    console.log("====================================");
     setQuestion("");
     toast.success("Question Submitted successfully");
   }
@@ -28,17 +25,7 @@ export default function AskOrg() {
   return (
     <Dialog>
       <form>
-        <DialogTrigger asChild>
-          <Button
-            variant="default"
-            className=" md:px-[20px] px-[16px] md:py-[16px] py-[12px]   flex justify-center items-center gap-[12px] bg-[#EFEFEF] border border-[#E8E8E8] rounded-xl cursor-pointer "
-          >
-            <HiOutlineQuestionMarkCircle className=" scale-125 text-[#3186C3]" />
-            <span className={`${text_size.p3} text-[#4B5563] font-[600]`}>
-              Ask Org
-            </span>
-          </Button>
-        </DialogTrigger>
+        <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle className={`${text_size.p2} font-[600] text-left`}>

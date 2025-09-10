@@ -29,6 +29,10 @@ import {
 } from "../../lib/components/ui/sidebar";
 import AppSidebarFooter from "./sideBarFooter";
 import { LuMessageCirclePlus } from "react-icons/lu";
+import { FaChartLine } from "react-icons/fa6";
+import { PiChatsBold } from "react-icons/pi";
+import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
+import AskOrg from "../ask_org/askOrg";
 
 export interface ChatHistoryInterface {
   title: string;
@@ -119,15 +123,15 @@ export function AppSidebar() {
                 <Accordion
                   type="single"
                   collapsible
-                  className="flex-1 flex flex-col "
+                  className=" flex flex-col "
                 >
                   <AccordionItem
                     value="item-1"
-                    className="flex flex-col flex-1  min-h-0"
+                    className="flex flex-col   min-h-0"
                   >
                     <AccordionTrigger>Chat history</AccordionTrigger>
 
-                    <AccordionContent className="flex-1 flex flex-col ">
+                    <AccordionContent className=" flex flex-col ">
                       <ScrollArea className="flex-1 min-h-0 w-full ">
                         <div className="flex flex-col gap-1 w-full ">
                           {chatHistory.map((item) => (
@@ -149,6 +153,43 @@ export function AppSidebar() {
                   </AccordionItem>
                 </Accordion>
               )}
+              <AskOrg>
+                <Button
+                  variant="ghost"
+                  className={`${
+                    isOpen
+                      ? " w-full cursor-pointer flex justify-start items-center border-[1px] border-[#AEECFF] bg-[#D4F5FF] rounded-[15px] text-black hover:bg-[#D4F5FF]"
+                      : "hover:bg-[#D4F5FF] cursor-pointer"
+                  }`}
+                >
+                  <HiOutlineQuestionMarkCircle className=" scale-100 " />
+                  {isOpen && "Ask org"}
+                </Button>
+              </AskOrg>
+              <Button
+                variant="ghost"
+                className={`${
+                  isOpen
+                    ? " w-full cursor-pointer flex justify-start items-center border-[1px] border-[#AEECFF] bg-[#D4F5FF] rounded-[15px] text-black hover:bg-[#D4F5FF]"
+                    : "hover:bg-[#D4F5FF] cursor-pointer"
+                }`}
+                onClick={() => navigate.push("/home/answers")}
+              >
+                <PiChatsBold className=" scale-100 " />
+                {isOpen && "Answers"}
+              </Button>
+              <Button
+                variant="ghost"
+                className={`${
+                  isOpen
+                    ? " w-full cursor-pointer flex justify-start items-center border-[1px] border-[#AEECFF] bg-[#D4F5FF] rounded-[15px] text-black hover:bg-[#D4F5FF]"
+                    : "hover:bg-[#D4F5FF] cursor-pointer"
+                }`}
+                onClick={() => navigate.push("/home/insight")}
+              >
+                <FaChartLine className=" scale-100 " />
+                {isOpen && "Insights"}
+              </Button>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

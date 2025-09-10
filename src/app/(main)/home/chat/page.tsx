@@ -1,7 +1,5 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { NewChatScreen } from "@/src/components/chat/chats_screen/newChatScreen";
 import ChatWatcher from "@/src/components/chat/chats_screen/chatWatcher";
+import { NewChatScreen } from "@/src/components/chat/chats_screen/newChatScreen";
 
 export default async function NewChatPage() {
   return (
