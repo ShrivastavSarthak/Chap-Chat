@@ -278,7 +278,7 @@ function SidebarTrigger({
       {open ? (
         <TbLayoutSidebarRightExpand className="scale-125" />
       ) : (
-        <TbLayoutSidebarLeftExpand className="scale-125" />
+      <TbLayoutSidebarLeftExpand className="scale-125" />
       )}{" "}
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
