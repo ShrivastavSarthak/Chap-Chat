@@ -6,6 +6,7 @@ import { PiChatsBold } from "react-icons/pi";
 import { FaChartLine } from "react-icons/fa6";
 import { useAppSelector } from "@/src/utils/services/store/hook";
 import AskOrg from "../../ask_org/askOrg";
+import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 
 export default function Suggestions() {
   const chat = useAppSelector((state) => state.chats);
@@ -20,7 +21,17 @@ export default function Suggestions() {
 
         <ScrollArea className="w-full whitespace-nowrap">
           <div className="flex justify-start items-center   gap-3 mt-[0.4rem]">
-            <AskOrg />
+            <AskOrg>
+              <Button
+                variant="default"
+                className="md:px-[20px] px-[16px] md:py-[16px] py-[12px]   flex justify-center items-center gap-[12px] bg-[#EFEFEF] border border-[#E8E8E8] rounded-xl cursor-pointer"
+              >
+                <HiOutlineQuestionMarkCircle className=" scale-125 text-[#3186C3]" />
+                <span className={`${text_size.p3} text-[#4B5563] font-[600]`}>
+                  Ask Org
+                </span>
+              </Button>
+            </AskOrg>
             <Button
               variant="default"
               className=" md:px-[20px] px-[16px] md:py-[16px] py-[12px]   flex justify-center items-center gap-[12px] bg-[#EFEFEF] border border-[#E8E8E8] rounded-xl cursor-pointer relative"
