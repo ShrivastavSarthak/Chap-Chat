@@ -3,6 +3,8 @@
 import { ReactNode, useEffect } from "react";
 import { useAppDispatch } from "../utils/services/store/hook";
 import { setUserData } from "../utils/services/store/slice/user";
+import { GetAnswersListQuery } from "../utils/services/api_services/tankstack/answers";
+import { fetchAnswers } from "../utils/services/store/slice/answer";
 
 export default function ReduxHydrate({
   user,
@@ -11,16 +13,23 @@ export default function ReduxHydrate({
   user: any;
   children: ReactNode;
 }) {
+  const { data: answersList } = GetAnswersListQuery();
+
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(setUserData(user?.data?.data));
-  }, [user, dispatch]);
-
+    if (user?.data?.data) {
+      dispatch(setUserData(user?.data?.data));
+    }
+    if (answersList?.data.data.questions) {
+      dispatch(fetchAnswers(answersList?.data.data.questions));
+    }
+  }, [user, dispatch, answersList]);
 
   return (
     <>
-      
-      <div className="w-full flex-1 overflow-y-auto ">{children}</div>
+      <div className="w-full flex-1 overflow-y-auto bg-[#F4F9FF]">
+        {children}
+      </div>
     </>
   );
 }

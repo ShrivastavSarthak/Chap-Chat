@@ -10,17 +10,24 @@ import {
 } from "@/src/lib/components/ui/dialog";
 import { Textarea } from "@/src/lib/components/ui/textarea";
 import { button_color, text_size } from "@/src/utils/constants/css.constants";
+import { CreateQuestionMutate } from "@/src/utils/services/api_services/tankstack/questions";
 import React, { useState } from "react";
-import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 import { toast } from "sonner";
 
 export default function AskOrg({ children }: { children: React.ReactElement }) {
   const [question, setQuestion] = useState<string>("");
-
-  function handleSubmit() {
-    setQuestion("");
-    toast.success("Question Submitted successfully");
-  }
+  const { mutateAsync: createQuestion } = CreateQuestionMutate();
+  const handleSubmit = async () => {
+    try {
+      const res = await createQuestion(question);
+      if (res.status === 200) {
+        setQuestion("");
+        toast.success("Question Submitted successfully");
+      }
+    } catch (error) {
+      toast.success("Something went wrong. Please try again");
+    }
+  };
 
   return (
     <Dialog>
@@ -54,6 +61,7 @@ export default function AskOrg({ children }: { children: React.ReactElement }) {
           <DialogFooter className="flex justify-end items-end gap-3">
             <Button
               variant="default"
+              type="button"
               disabled={question.length < 20}
               className={`${button_color.linerGradient} cursor-pointer`}
               onClick={handleSubmit}
