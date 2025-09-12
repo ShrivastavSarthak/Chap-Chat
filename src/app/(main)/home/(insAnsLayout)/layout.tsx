@@ -1,6 +1,5 @@
 import PageMobileHeader from "@/src/components/mobile_headers/pageMobileHeader";
 import { ScrollArea, ScrollBar } from "@/src/lib/components/ui/scroll-area";
-import { text_size } from "@/src/utils/constants/css.constants";
 import { ReactNode } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {

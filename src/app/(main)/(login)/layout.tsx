@@ -1,7 +1,6 @@
 import { media } from "@/public";
 import Image from "next/image";
 import { text_size } from "../../../utils/constants/css.constants";
-import AuthPage from "@/src/components/auth/auth";
 export default function LoginLayout({
   children,
 }: Readonly<{

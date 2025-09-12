@@ -1,6 +1,8 @@
 "use server";
 import {
+  answers_url,
   chats_url,
+  questions_url,
   user_url,
 } from "@/src/utils/constants/apiConstants/api.url";
 import {
@@ -108,4 +110,29 @@ export async function SetExistingChat(id: string) {
   } catch (error) {
     return false;
   }
+}
+
+export async function CreateQuestion(question: string) {
+  const authToken = (await cookies()).get("auth_token");
+  const res = await apiFetch({
+    method: apiMethod.POST,
+    url: questions_url.createQuestion,
+    body: { question: question },
+    header: {
+      Authorization: `Bearer ${authToken?.value}`,
+    },
+  });
+  return res;
+}
+
+export async function GetAnswersList() {
+  const authToken = (await cookies()).get("auth_token");
+  const res = await apiFetch({
+    method: apiMethod.GET,
+    url: answers_url.getAllAnswers,
+    header: {
+      Authorization: `Bearer ${authToken?.value}`,
+    },
+  });
+  return res;
 }
