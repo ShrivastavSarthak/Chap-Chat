@@ -25,7 +25,7 @@ export function middleware(req: NextRequest) {
   // ✅ Case 3: User has `auth_token` (fully logged in)
   if (authToken) {
     if (isLoginPage || isOtpPage) {
-      return NextResponse.redirect(new URL("/home", req.url));
+      return NextResponse.redirect(new URL("/home/chat", req.url));
     }
   }
 
