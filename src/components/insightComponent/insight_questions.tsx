@@ -17,7 +17,7 @@ export interface QuestionInsight {
 }
 
 export default function InsightComponents() {
-  const { data, isLoading } = GetAllInsightsQuestionQuery();
+  const { data, isFetching } = GetAllInsightsQuestionQuery();
   const [insightArray, setInsightArray] = useState<QuestionInsight[]>([]);
 
   useEffect(() => {
@@ -33,14 +33,14 @@ export default function InsightComponents() {
         <h1 className={`${text_size.p1} font-[600] mb-6`}>Insight</h1>
       )}
       <div className="w-full flex flex-col gap-4">
-        {!isLoading ? (
+        {!isFetching ? (
           <>
             {insightArray.map((ques) => (
               <Card
                 key={ques.questionId}
                 className="w-full cursor-pointer rounded-2xl border border-[#CEEDFD] shadow-[0_7px_15px_0_rgba(25,169,249,0.10)]"
                 onClick={() => {
-                  navigate.push(`/home/insight/${ques.askedAgo}`);
+                  navigate.push(`/home/insight/${ques.questionId}`);
                 }}
               >
                 <CardContent>
@@ -76,7 +76,7 @@ export default function InsightComponents() {
           </>
         ) : (
           <div className="h-full flex flex-col justify-center items-center">
-            <Mosaic color="#32cd32" size="medium" text="" textColor="" />
+            <Mosaic color="#19A9F9" size="small" text="" textColor="" />
             <h1 className={`${text_size.p2} font-[600] mt-4`}>Loading...</h1>
           </div>
         )}

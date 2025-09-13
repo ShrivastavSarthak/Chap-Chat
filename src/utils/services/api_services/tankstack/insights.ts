@@ -1,6 +1,6 @@
 import {
   GetAllInsightsQuestions,
-  GetInsightsByQuestions,
+  GetInsightSummary,
 } from "@/src/app/(main)/home/(insAnsLayout)/insight/action";
 import { useQuery } from "@tanstack/react-query";
 
@@ -11,9 +11,9 @@ export function GetAllInsightsQuestionQuery() {
   });
 }
 
-export function GetInsightsByQuestionsQuery() {
+export function GetInsightsSummaryQuery(qId: string) {
   return useQuery({
-    queryKey: [],
-    queryFn: () => GetInsightsByQuestions(),
+    queryKey: ["FETCH_INSIGHT_SUMMARY"],
+    queryFn: () => GetInsightSummary(qId),
   });
 }
