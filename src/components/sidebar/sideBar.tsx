@@ -33,12 +33,7 @@ import { FaChartLine } from "react-icons/fa6";
 import { PiChatsBold } from "react-icons/pi";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi";
 import AskOrg from "../ask_org/askOrg";
-
-export interface ChatHistoryInterface {
-  title: string;
-  updatedAt: string;
-  _id: string;
-}
+import { ChatHistoryInterface } from "@/src/utils/interface/chatInterface";
 
 export function AppSidebar() {
   const [chatHistory, setChatHistory] = useState<ChatHistoryInterface[]>([]);
@@ -47,7 +42,6 @@ export function AppSidebar() {
   const { data } = GetChatHistory();
   const { open, isMobile } = useSidebar();
 
-  // ✅ Always keep sidebar open if mobile
   const isOpen = isMobile ? true : open;
 
   useEffect(() => {
@@ -117,8 +111,6 @@ export function AppSidebar() {
                 <LuMessageCirclePlus className="scale-100" />
                 {isOpen && "New Chats"}
               </Button>
-
-              {/* Chat History */}
               {isOpen && (
                 <Accordion
                   type="single"
@@ -158,7 +150,7 @@ export function AppSidebar() {
                   variant="ghost"
                   className={`${
                     isOpen
-                      ? " w-full cursor-pointer flex justify-start items-center border-[1px] border-[#AEECFF] bg-[#D4F5FF] rounded-[15px] text-black hover:bg-[#D4F5FF]"
+                      ? " w-full cursor-pointer flex justify-start items-center border-[0px]  rounded-[15px] text-black hover:bg-[#D4F5FF]"
                       : "hover:bg-[#D4F5FF] cursor-pointer"
                   }`}
                 >
@@ -170,7 +162,7 @@ export function AppSidebar() {
                 variant="ghost"
                 className={`${
                   isOpen
-                    ? " w-full cursor-pointer flex justify-start items-center border-[1px] border-[#AEECFF] bg-[#D4F5FF] rounded-[15px] text-black hover:bg-[#D4F5FF]"
+                    ? " w-full cursor-pointer flex justify-start items-center border-[0px]   rounded-[15px] text-black hover:bg-[#D4F5FF]"
                     : "hover:bg-[#D4F5FF] cursor-pointer"
                 }`}
                 onClick={() => navigate.push("/home/answers")}
@@ -182,7 +174,7 @@ export function AppSidebar() {
                 variant="ghost"
                 className={`${
                   isOpen
-                    ? " w-full cursor-pointer flex justify-start items-center border-[1px] border-[#AEECFF] bg-[#D4F5FF] rounded-[15px] text-black hover:bg-[#D4F5FF]"
+                    ? " w-full cursor-pointer flex justify-start items-center border-[0px]  rounded-[15px] text-black hover:bg-[#D4F5FF]"
                     : "hover:bg-[#D4F5FF] cursor-pointer"
                 }`}
                 onClick={() => navigate.push("/home/insight")}
@@ -193,8 +185,6 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-
-        {/* Footer stays fixed */}
         <SidebarFooter>
           <AppSidebarFooter />
         </SidebarFooter>
