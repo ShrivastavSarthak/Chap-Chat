@@ -1,4 +1,4 @@
-export interface AnswerInterface {
+export interface QuestionInterface {
   askedBy: {
     id: string;
     name: string;

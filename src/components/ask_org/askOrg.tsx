@@ -10,17 +10,41 @@ import {
 } from "@/src/lib/components/ui/dialog";
 import { Textarea } from "@/src/lib/components/ui/textarea";
 import { button_color, text_size } from "@/src/utils/constants/css.constants";
+import { QuestionInterface } from "@/src/utils/interface/questionInterface";
 import { CreateQuestionMutate } from "@/src/utils/services/api_services/tankstack/questions";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "@/src/utils/services/store/hook";
+import { addQuestion } from "@/src/utils/services/store/slice/questions";
 import React, { useState } from "react";
+import { FourSquare } from "react-loading-indicators";
 import { toast } from "sonner";
+import { v4 as uuidv4 } from "uuid";
 
 export default function AskOrg({ children }: { children: React.ReactElement }) {
   const [question, setQuestion] = useState<string>("");
-  const { mutateAsync: createQuestion } = CreateQuestionMutate();
+  const { mutateAsync: createQuestion, isPending } = CreateQuestionMutate();
+  const dispatch = useAppDispatch();
+  console.log("====================================");
+  console.log("isPending", isPending);
+  console.log("====================================");
+  const user = useAppSelector((state) => state.user);
   const handleSubmit = async () => {
     try {
       const res = await createQuestion(question);
       if (res.status === 200) {
+        const questions: QuestionInterface = {
+          askedBy: {
+            id: user._id,
+            name: user.name,
+          },
+          points: 5,
+          question: question,
+          type: "TEXT",
+          questionId: uuidv4(),
+        };
+        dispatch(addQuestion(questions));
         setQuestion("");
         toast.success("Question Submitted successfully");
       }
@@ -59,15 +83,19 @@ export default function AskOrg({ children }: { children: React.ReactElement }) {
             </p>
           )}
           <DialogFooter className="flex justify-end items-end gap-3">
-            <Button
-              variant="default"
-              type="button"
-              disabled={question.length < 20}
-              className={`${button_color.linerGradient} cursor-pointer`}
-              onClick={handleSubmit}
-            >
-              Submit
-            </Button>
+            {isPending ? (
+              <FourSquare color="#19A9F9" size="small" text="" textColor="" />
+            ) : (
+              <Button
+                variant="default"
+                type="button"
+                disabled={question.length < 20}
+                className={`${button_color.linerGradient} cursor-pointer`}
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </form>

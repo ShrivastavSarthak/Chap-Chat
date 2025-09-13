@@ -3,3 +3,9 @@ export interface ChatInterface {
   content: string;
   _id?: string;
 }
+
+export interface ChatHistoryInterface {
+  title: string;
+  updatedAt: string;
+  _id: string;
+}

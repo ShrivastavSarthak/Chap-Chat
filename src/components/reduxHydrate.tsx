@@ -4,7 +4,7 @@ import { ReactNode, useEffect } from "react";
 import { useAppDispatch } from "../utils/services/store/hook";
 import { setUserData } from "../utils/services/store/slice/user";
 import { GetAnswersListQuery } from "../utils/services/api_services/tankstack/answers";
-import { fetchAnswers } from "../utils/services/store/slice/answer";
+import { fetchQuestions } from "../utils/services/store/slice/questions";
 
 export default function ReduxHydrate({
   user,
@@ -21,7 +21,7 @@ export default function ReduxHydrate({
       dispatch(setUserData(user?.data?.data));
     }
     if (answersList?.data.data.questions) {
-      dispatch(fetchAnswers(answersList?.data.data.questions));
+      dispatch(fetchQuestions(answersList?.data.data.questions));
     }
   }, [user, dispatch, answersList]);
 

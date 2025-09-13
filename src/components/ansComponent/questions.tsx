@@ -8,7 +8,7 @@ import { FaUser } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoChevronForward } from "react-icons/io5";
 import GiveAnswers from "./giveAnswers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "@/src/utils/services/store/hook";
 
 export default function AnswerThis() {
@@ -16,6 +16,7 @@ export default function AnswerThis() {
   const questionsArr = useAppSelector((state) => state.answers);
   const user = useAppSelector((state) => state.user._id);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+  const [questionId, setQuestionId] = useState<string | null>(null);
 
   const handleForward = () => {
     if (currentQuestion < questionsArr.length - 1) {
@@ -29,6 +30,10 @@ export default function AnswerThis() {
     }
   };
 
+  useEffect(() => {
+    setQuestionId(questionsArr[currentQuestion]?.questionId);
+  }, [currentQuestion, questionsArr]);
+
   return (
     <>
       {!isMobile && (
@@ -39,8 +44,8 @@ export default function AnswerThis() {
           <div className="flex justify-start items-center gap-3">
             <FaUser className="text-[#19A9F9]" />
             <span className={`${text_size.p3} text-[#19A9F9] font-[600]`}>
-              {questionsArr[currentQuestion].askedBy.id !== user
-                ? questionsArr[currentQuestion].askedBy.name
+              {questionsArr[currentQuestion]?.askedBy?.id !== user
+                ? questionsArr[currentQuestion]?.askedBy?.name
                 : "You"}{" "}
               asked this
             </span>
@@ -65,7 +70,7 @@ export default function AnswerThis() {
           </div>
         </div>
         <h4 className={`${text_size.p2} font-[600] text-[#0F295C] my-1`}>
-          {questionsArr[currentQuestion].question}
+          {questionsArr[currentQuestion]?.question}
         </h4>
         <h3 className={`${text_size.p2} font-[600] text-[#19A9F9]`}>
           Question {currentQuestion + 1}/{questionsArr.length}
@@ -74,7 +79,7 @@ export default function AnswerThis() {
       <h3 className={`${text_size.p3} font-[600] text-[#585858] mb-4 mt-8`}>
         Your answer
       </h3>
-      <GiveAnswers />
+      <GiveAnswers questionId={questionId} />
     </>
   );
 }
