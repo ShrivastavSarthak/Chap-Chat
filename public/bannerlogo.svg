@@ -1,0 +1,79 @@
+<!-- Save as chap-chat-wordmark.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200" viewBox="0 0 600 150" role="img" aria-labelledby="titleDesc" class="chap-chat-root">
+  <title id="titleDesc">chap-chat wordmark logo</title>
+  <desc>Wordmark: chap-chat with a fixed orange speech bubble (no tail). A black dot moves around inside the orange circle near its boundary. Font color: #FAF3E1. Colors: #FF6D1F and #222222.</desc>
+
+  <style>
+    :root{
+      --accent: #FF6D1F;
+      --dark: #222222;
+      --light-font: #FAF3E1;
+    }
+
+    svg.chap-chat-root { background: transparent; overflow: visible; }
+
+    .word {
+      font-family: Inter, Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-weight: 700;
+      font-size: 64px;
+      fill: var(--light-font);
+      letter-spacing: -1px;
+    }
+
+    /* Orbit animation for the black dot: rotate around the bubble center (0,30) */
+    .orbit {
+      transform-box: fill-box;
+      transform-origin: 0px 30px; /* center of the bubble (relative to group) */
+      animation: orbit 2000ms linear infinite;
+    }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+
+    /* Slight subtle pulse of the orange circle (optional) */
+    .bubble .circle {
+      transform-box: fill-box;
+      transform-origin: 0px 30px;
+      animation: bubblePulse 1800ms ease-in-out infinite;
+    }
+    @keyframes bubblePulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    /* Reduced motion: stop animations */
+    @media (prefers-reduced-motion: reduce) {
+      .orbit, .bubble .circle { animation: none !important; transform: none !important; }
+    }
+
+    /* Only show pointer cursor when hover devices */
+    @media (hover: hover) and (pointer: fine) {
+      svg { cursor: default; }
+    }
+  </style>
+
+  <!-- center the entire logo by translating to the center of the viewBox (300,80) -->
+  <g transform="translate(300,80)" aria-hidden="true">
+    <!-- 'chap' to the left -->
+    <text class="word" x="-180" y="0">chap</text>
+
+    <!-- bubble group: fixed orange circle; orbiting dot is in a rotating subgroup -->
+    <g transform="translate(0,-30)" aria-hidden="true">
+      <!-- fixed orange bubble (center at 0,30) -->
+      <g class="bubble" aria-hidden="true">
+        <circle class="circle" cx="0" cy="30" r="22" fill="#FF6D1F" />
+        <!-- small inner shine (fixed with circle) -->
+        <ellipse cx="-6" cy="18" rx="4.6" ry="4" fill="#ffffff" opacity="0.14"/>
+      </g>
+
+      <!-- orbiting dot: place the dot initially at (18,30) (slightly inset from r=22),
+           and rotate this group around (0,30) so the dot travels near the inner boundary -->
+      
+    </g>
+
+    <!-- 'chat' to the right -->
+    <text class="word" x="40" y="0">chat</text>
+  </g>
+
+  <!-- Accessible plain text for screen readers (kept visually hidden) -->
+  <text x="-9999" y="-9999" aria-hidden="false">chap-chat</text>
+</svg>

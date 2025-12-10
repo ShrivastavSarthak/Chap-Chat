@@ -1,0 +1,27 @@
+<!-- Save as chap-chat-wordmark.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="140" viewBox="0 0 600 140" role="img" aria-labelledby="titleDesc">
+  <title id="titleDesc">chap-chat wordmark logo</title>
+  <desc>Wordmark: chap-chat with a small orange speech bubble as the hyphen. Colors: #FF6D1F and #222222.</desc>
+
+  <!-- background optional (comment out if not wanted) -->
+  <!-- <rect width="100%" height="100%" fill="#ffffff"/> -->
+
+  <!-- Main text -->
+  <g transform="translate(20,88)">
+    <!-- 'chap' -->
+    <text x="47" y="0" font-family="Inter, Roboto, system-ui, -apple-system, 'Segoe UI', sans-serif" font-weight="700"
+          font-size="64" fill="#222222" letter-spacing="-1">Chap</text>
+
+    <!-- spacer then speech-bubble as hyphen -->
+    <g transform="translate(190,-30)">
+      <!-- bubble body -->
+      <path d="M28 6.5a21.5 21.5 0 1 1 0 43a21.5 21.5 0 0 1 0-43z" fill="#FF6D1F"/>
+      <!-- little tail -->
+      <path d="M46 38c-4 2-8 4-10 6 1-4 1-9-1-13 4 1 9 1 11 1z" fill="#FF6D1F" opacity="0.95"/>
+    </g>
+
+    <!-- 'chat' -->
+    <text x="240" y="0" font-family="Inter, Roboto, system-ui, -apple-system, 'Segoe UI', sans-serif" font-weight="700"
+          font-size="64" fill="#222222" letter-spacing="-1">Chat</text>
+  </g>
+</svg>

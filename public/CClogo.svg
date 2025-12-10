@@ -1,0 +1,35 @@
+<!-- Save as chap-chat-symbol.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300" role="img" aria-labelledby="symTitle">
+  <title id="symTitle">chap-chat symbol logo</title>
+  <desc>Interlocking CC symbol forming a speech bubble. Colors: #FF6D1F and #222222.</desc>
+
+  <defs>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- background circle (optional) -->
+  <circle cx="150" cy="150" r="140" fill="#ffffff"/>
+
+  <!-- left C (orange) -->
+  <path d="M90 80
+           a60 60 0 1 1 0 120
+           l0 -22
+           a38 38 0 1 0 0 -76z"
+        fill="#FF6D1F" filter="url(#soft)"/>
+
+  <!-- right C (dark) -->
+  <path d="M210 80
+           a60 60 0 1 0 0 120
+           l0 -22
+           a38 38 0 1 1 0 -76z"
+        fill="#222222" />
+
+  <!-- small speech-tail notch in center (cutout feel) -->
+  <path d="M150 190 l18 20 l-36 0 z" fill="#FF6D1F" opacity="0.95"/>
+
+  <!-- optional inner gap to create 'C' look (white cutouts) -->
+  <path d="M90 95 a45 45 0 1 1 0 90 l0 -15 a30 30 0 1 0 0 -60z" fill="#ffffff" opacity="0.0"/>
+  <path d="M210 95 a45 45 0 1 0 0 90 l0 -15 a30 30 0 1 1 0 -60z" fill="#ffffff" opacity="0.0"/>
+</svg>
